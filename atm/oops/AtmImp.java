@@ -84,17 +84,25 @@ public class AtmImp implements Atm{
             }
 }
 }
-//	 public void viewMiniStatement() {
-//        int count = 0;
-//        for (Map.Entry<LocalDateTime, List<String>> entry : hisAmt.entrySet()) {
-//            LocalDate date = entry.getKey();
-//            List<String> transactions = entry.getValue();
-//            
-//            for (String transaction : transactions) {
-//                count++;
-//                System.out.println(count + ") " + date + " " + transaction);
-//            }
-//        }
-//    }
 }      
+/*
+Without computeIfAbsent (Old Way)
 
+=============================================================================================
+Before Java 8, you would write:
+=============================================================================================
+if (!hisAmt.containsKey(today)) {
+    hisAmt.put(today, new ArrayList<>());  // Initialize if key doesn't exist
+}
+hisAmt.get(today).add("Withdrawn: " + WithdrawAmount); // Add transaction
+
+This requires explicitly checking for the key and handling initialization.
+
+=============================================================================================
+With computeIfAbsent (New Way)
+=============================================================================================
+hisAmt.computeIfAbsent(today, k -> new ArrayList<>()).add("Withdrawn: " + WithdrawAmount);
+
+    This eliminates manual checks and makes the code shorter and cleaner. 
+    
+ */
